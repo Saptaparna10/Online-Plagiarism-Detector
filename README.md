@@ -5,6 +5,14 @@ among student submissions.
 
 Please check out the [link](http://ec2-18-220-14-203.us-east-2.compute.amazonaws.com:8080/#/home) to use the application.
 
+
+Technologies used:
+
+Java
+AngularJs
+Boostrap
+Spring Data JPA
+
 Features:
 
 A professors can:
@@ -22,3 +30,6 @@ An admin can:
 Approve registration request for new professors
 View analysis of system usage displayed in form of intuitive graphs
 An operations server monitors the status of the system
+
+
+Note: The sourcecode can be made available on special request.
