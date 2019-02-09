@@ -3,8 +3,6 @@
 This project is done in a team of four people. The system can be used as a homework system which has a tool to detect plagiarism
 among student submissions.
 
-Please check out the [link](http://ec2-18-220-14-203.us-east-2.compute.amazonaws.com:8080/#/home) to use the application.
-
 
 Technologies used:
 
@@ -32,4 +30,3 @@ View analysis of system usage displayed in form of intuitive graphs
 An operations server monitors the status of the system
 
 
-Note: The sourcecode can be made available on special request.
