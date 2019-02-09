@@ -1,0 +1,87 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <a>
+            <div ng-show="model.open">
+                <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.openNav()"></span>
+            </div>
+            <div ng-show="!model.open">
+                <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.closeNav()"></span>
+            </div>
+        </a>
+        <div class="navbar-text pull-right" ng-show="model.userId">
+            <a class="name" href="#/profile">Hi {{model.user.firstName}}</a>
+        </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#/profile">Whiteboard</a>
+        </div>
+    </div>
+</nav>
+
+<div id="mySidenav" class="sidenav">
+    <div ng-show="model.userId">
+        <a href="#/profile">Profile</a>
+        <a href="#/stats">Statistics</a>
+        <a href="#/course">Courses</a>
+        <a class="active-page" href="#/course/{{model.courseId}}/hw">Homeworks</a>
+        <a ng-click="model.logout()">Logout</a>
+    </div>
+</div>
+
+<div class="container-fluid panel panel-default" id="main">
+    <div class="hidden-xs list-group col-sm-4 leftDiv">
+        <h4 class="panel panel-default">Homeworks</h4>
+        <div ng-show="model.message" class="alert alert-info" role="alert">
+            {{model.message}}
+        </div>
+        <li ng-repeat="hw in model.hws" class="list-group-item">
+            <a class="btn" href="#/course/{{model.courseId}}/hw/{{hw.id}}/submission">{{hw.name}}</a>
+            <a class="btn pull-right" href="#/course/{{model.courseId}}/hw/{{hw.id}}">
+                <span class="glyphicon glyphicon-edit"></span>
+            </a>
+        </li>
+    </div>
+
+    <div class="col-sm-8">
+        <h4 class="panel panel-default">Add/Edit Homework</h4>
+        <div ng-show="model.error" class="alert alert-danger" role="alert">
+            {{model.error}}
+        </div>
+        <form ng-submit="model.createUpdateHw(model.hw)">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input ng-model="model.hw.name" type="text" class="form-control" id="name" placeholder="name">
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <textarea ng-model="model.hw.description" type="text" class="form-control"
+                          rows="4" placeholder="Description"></textarea>
+            </div>
+            <button class="btn btn-primary btn-block">Submit</button>
+        </form>
+        <a class="btn btn-danger  btn-block"
+           href="#/course/{{model.courseId}}/hw">Cancel</a>
+    </div>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <p class="copyright hidden-xs">© Northeastern CCIS 2018</p>
+        <div class="dropdown navbar-text pull-left" ng-if="model.user.role != 'admin'">
+            <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
+                Need help?
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#/contactAdmin">Contact Admin</a></li>
+            </ul>
+        </div>
+        <div class="dropdown navbar-text pull-right">
+            <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#/profile">Profile</a></li>
+                <li><a ng-click="model.logout()">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

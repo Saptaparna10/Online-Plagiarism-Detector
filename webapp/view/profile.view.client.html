@@ -1,0 +1,120 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <a>
+            <div ng-show="model.open">
+                <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.openNav()"></span>
+            </div>
+            <div ng-show="!model.open">
+                <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.closeNav()"></span>
+            </div>
+        </a>
+        <div class="navbar-text pull-right" ng-show="model.userId">
+            <a class="name" href="#/profile">Hi {{model.user.firstName}}</a>
+        </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#/profile">Whiteboard</a>
+        </div>
+    </div>
+</nav>
+
+<div id="mySidenav" class="sidenav">
+    <a class="active-page">Profile</a>
+    <div ng-show="model.user.role == 'Student'">
+        <a href="#/course">Courses</a>
+    </div>
+    <div ng-show="model.user.role == 'Professor'">
+        <a href="#/stats">Statistics</a>
+        <a href="#/course">Courses</a>
+    </div>
+    <div ng-show="model.user.role == 'admin'">
+        <a href="#/userApprove">Approve users</a>
+        <a href="#/analysis">Analysis</a>
+        <a href="#/userContact">Contact Notes</a>
+    </div>
+    <a ng-click="model.logout()">Logout</a>
+</div>
+
+<div class="form-center2">
+    <div class="container-fluid panel panel-default" id="main">
+        <div ng-show="model.error" class="alert alert-danger" role="alert">
+            {{model.error}}
+        </div>
+        <div ng-show="model.message" class="alert alert-success" role="alert">
+            {{model.message}}
+        </div>
+        <form ng-submit="model.update(model.user)">
+            <label><h4><strong>Profile</strong></h4></label>
+            <div class="input-group">
+                <span class="input-group-addon fixed-width">
+                    <span class="glyphicon glyphicon glyphicon-user user-grey"></span>
+                    <label class="registerLabel">Username</label>
+                </span>
+                <input ng-model="model.user.username" type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" readonly>
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-addon fixed-width">
+                    <span class="glyphicon glyphicon glyphicon-pencil user-grey"></span>
+                    <label class="registerLabel">First Name</label>
+                </span>
+                <input ng-model="model.user.firstName" type="text" class="form-control" placeholder="First Name" aria-describedby="basic-addon1" required>
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-addon fixed-width">
+                    <span class="glyphicon glyphicon glyphicon-pencil user-grey"></span>
+                    <label class="registerLabel">Last Name</label>
+                </span>
+                <input ng-model="model.user.lastName" type="text" class="form-control" placeholder="Last Name" aria-describedby="basic-addon1" required>
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon glyphicon-envelope user-grey"></span>
+                    <label class="registerLabel">Email</label>
+                </span>
+                <input ng-model="model.user.email" type="email" class="form-control" placeholder="Email Address" aria-describedby="basic-addon1" required>
+            </div>
+            <br/>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon glyphicon-eye-open user-grey"></span>
+                    <label class="registerLabel">Password</label>
+                </span>
+                <input ng-model="model.user.passwrd" type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1" required>
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon glyphicon-eye-open user-grey"></span>
+                    <label class="registerLabel">Verify Password</label>
+                </span>
+                <input ng-model="model.user.verifyPasswrd" type="password" class="form-control" placeholder="Verify Password" aria-describedby="basic-addon1" required>
+            </div>
+            <button class="btn btn-success btn-block">Update</button>
+        </form>
+    </div>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <p class="copyright hidden-xs">© Northeastern CCIS 2018</p>
+        <div class="dropdown navbar-text pull-left" ng-if="model.user.role != 'admin'">
+            <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
+                Need help?
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#/contactAdmin">Contact Admin</a></li>
+            </ul>
+        </div>
+        <div class="dropdown navbar-text pull-right">
+            <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#/profile">Profile</a></li>
+                <li><a ng-click="model.logout()">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

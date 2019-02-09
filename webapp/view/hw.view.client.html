@@ -1,0 +1,76 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <a>
+            <div ng-show="model.open">
+                <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.openNav()"></span>
+            </div>
+            <div ng-show="!model.open">
+                <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.closeNav()"></span>
+            </div>
+        </a>
+        <div class="navbar-text pull-right" ng-show="model.userId">
+            <a class="name" href="#/profile">Hi {{model.user.firstName}}</a>
+        </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#/profile">Whiteboard</a>
+        </div>
+    </div>
+</nav>
+
+<div id="mySidenav" class="sidenav">
+    <div ng-show="model.userId">
+        <a href="#/profile">Profile</a>
+        <div ng-show="model.user.role == 'Professor'">
+            <a href="#/stats">Statistics</a>
+        </div>
+        <a href="#/course">Courses</a>
+        <ul><a class="active-page">Homeworks</a></ul>
+        <a ng-click="model.logout()">Logout</a>
+    </div>
+</div>
+
+<div class="container-fluid panel panel-default" id="main">
+    <div ng-show="model.message" class="alert alert-info" role="alert">
+        {{model.message}}
+    </div>
+    <div class="row" ng-show="model.user.role == 'Professor'">
+        <a class="pull-right pull-down panel panel-default black" href="#/course/{{model.courseId}}/hw/new">
+            Create New HW
+        </a>
+    </div>
+    <h4 class="panel panel-default">Homeworks for Course: {{model.hws[0].course.name}}</h4>
+    <li ng-repeat="hw in model.hws" class="list-group-item">
+        <div ng-show="model.user.role == 'Student'">
+            <a class="btn" href="#/course/{{model.courseId}}/hw/{{hw.id}}/submission">{{hw.name}}</a>
+        </div>
+        <div ng-show="model.user.role == 'Professor'">
+            <a class="btn" href="#/course/{{model.courseId}}/hw/{{hw.id}}/submissions">{{hw.name}}</a>
+            <a class="btn pull-right" href="#/course/{{model.courseId}}/hw/{{hw.id}}">
+                <span class="glyphicon glyphicon-edit"></span>
+            </a>
+        </div>
+    </li>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <p class="copyright hidden-xs">© Northeastern CCIS 2018</p>
+        <div class="dropdown navbar-text pull-left" ng-if="model.user.role != 'admin'">
+            <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
+                Need help?
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#/contactAdmin">Contact Admin</a></li>
+            </ul>
+        </div>
+        <div class="dropdown navbar-text pull-right">
+            <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a>Profile</a></li>
+                <li><a ng-click="model.logout()">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

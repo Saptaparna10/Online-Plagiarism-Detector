@@ -1,0 +1,106 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <a>
+            <div ng-show="model.open">
+                <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.openNav()"></span>
+            </div>
+            <div ng-show="!model.open">
+                <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.closeNav()"></span>
+            </div>
+        </a>
+        <div class="navbar-text pull-right" ng-show="model.userId">
+            <a class="name" href="#/profile">Hi {{model.user.firstName}}</a>
+        </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#/profile">Whiteboard</a>
+        </div>
+    </div>
+</nav>
+
+<div id="mySidenav" class="sidenav">
+    <div ng-show="model.userId">
+        <a href="#/profile">Profile</a>
+        <a href="#/stats">Statistics</a>
+        <a href="#/course">Courses</a>
+        <ul><a href="#/course/{{model.courseId}}/hw">Homeworks</a></ul>
+        <ul><ul><a class="active-page">Submissions</a></ul></ul>
+        <a ng-click="model.logout()">Logout</a>
+    </div>
+</div>
+<div class="container-fluid panel panel-default" id="main">
+    <div ng-show="model.message" class="alert alert-info" role="alert">
+        {{model.message}}
+    </div>
+    <div class="panel panel-default">
+        <label><h4>Submissions for {{model.data[0].homework.name}}</h4></label>
+        <p class="pull-right">
+            *System only works for python3.
+        </p>
+    </div>
+    <div class="panel panel-default pull-right" ng-init="model.algo=5">
+        <input type="radio" ng-model="model.algo" ng-value="1">
+        <label class="spaceRadio">Algo 1</label>
+
+        <input type="radio" ng-model="model.algo" ng-value="2">
+        <label class="spaceRadio">Algo 2</label>
+
+        <input type="radio" ng-model="model.algo" ng-value="3">
+        <label class="spaceRadio">Algo 3</label>
+
+        <input type="radio" ng-model="model.algo" ng-value="4">
+        <label class="spaceRadio">Algo 4</label>
+
+        <input type="radio" ng-model="model.algo" ng-value="5">
+        <label class="spaceRadio">Weighted</label>
+
+        <input type="radio" ng-model="model.algo" ng-value="0">
+        <label class="spaceRadio">All</label>
+    </div>
+    <table ng-table="model.tableParams" class="table table-condensed table-bordered table-striped" show-filter="!model.message">
+        <tr ng-repeat="row in $data">
+            <td data-title="'Student Id'" filter="{ 'student.id': 'number'}" sortable="'student.id'" class="center">
+                {{row.student.id}}
+            </td>
+            <td data-title="'First Name'" filter="{ 'student.firstName': 'text'}" sortable="'student.firstName'" class="center">
+                {{row.student.firstName}}
+            </td>
+            <td data-title="'Last Name'" filter="{ 'student.lastName': 'text'}" sortable="'student.lastName'" class="center">
+                {{row.student.lastName}}
+            </td>
+            <td data-title="'Email'" filter="{ 'student.email': 'text'}" sortable="'student.email'" class="center">
+                {{row.student.email}}
+            </td>
+            <td data-title="'Submission Date Time'" filter="{ 'uploadDateTime': 'text'}" sortable="'uploadDateTime'" class="center" pattern="dd/MM/YYYY">
+                {{row.uploadDateTime}}
+            </td>
+            <td data-title="'Check Plagiarism'" class="center">
+                <a type="button" class="btn btn-primary btn-s shift-up-3" href="#/course/{{model.courseId}}/hw/{{model.hwId}}/student/{{row.student.id}}/percent/{{model.algo}}" ng-disabled="model.tableParams.data.length < 2">
+                    <span class="glyphicon glyphicon-alert"></span> Check Plagiarism
+                </a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <p class="copyright hidden-xs">© Northeastern CCIS 2018</p>
+        <div class="dropdown navbar-text pull-left" ng-if="model.user.role != 'admin'">
+            <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
+                Need help?
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#/contactAdmin">Contact Admin</a></li>
+            </ul>
+        </div>
+        <div class="dropdown navbar-text pull-right">
+            <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#/profile">Profile</a></li>
+                <li><a ng-click="model.logout()">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

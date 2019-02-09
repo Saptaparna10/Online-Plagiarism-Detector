@@ -1,0 +1,121 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <a>
+            <div ng-show="model.open">
+                <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.openNav()"></span>
+            </div>
+            <div ng-show="!model.open">
+                <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.closeNav()"></span>
+            </div>
+        </a>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#/login">Whiteboard</a>
+        </div>
+    </div>
+</nav>
+<div id="mySidenav" class="sidenav">
+    <div>
+        <a href="#/login">Login</a>
+        <a class="active-page" >Register</a>
+    </div>
+</div>
+<div class="form-center2">
+    <div class="container-fluid panel panel-default" id="main">
+        <div ng-show="model.error" class="alert alert-danger" role="alert">
+            {{model.error}}
+        </div>
+        <form name="registerForm" ng-submit="model.register(user)">
+            <label><h4><strong>Register</strong></h4></label>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-user user-grey"></span>
+                    <label class="registerLabel">Username <span>*</span></label>
+                </span>
+                <input ng-model="user.username"
+                       type="text"
+                       class="form-control"
+                       placeholder="Username"
+                       aria-describedby="basic-addon1" required>
+            </div>
+            <br>
+            <div class="input-group">
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-eye-open user-grey"></span>
+                <label class="registerLabel">Password <span>*</span></label>
+            </span>
+                <input ng-model="user.passwrd" type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1" required>
+            </div>
+            <br>
+            <div class="input-group">
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-eye-open user-grey"></span>
+                <label class="registerLabel">Verify Password <span>*</span></label>
+            </span>
+                <input ng-model="user.verifyPasswrd" type="password" class="form-control" placeholder="Verify Password" aria-describedby="basic-addon1" required>
+            </div>
+            <br>
+            <div class="input-group">
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-pencil user-grey"></span>
+                <label class="registerLabel">First Name <span>*</span></label>
+            </span>
+                <input ng-model="user.firstName" type="text" class="form-control" placeholder="First Name" aria-describedby="basic-addon1" required>
+            </div>
+            <br>
+            <div class="input-group">
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-pencil user-grey"></span>
+                <label class="registerLabel">Last Name <span>*</span></label>
+            </span>
+                <input ng-model="user.lastName" type="text" class="form-control" placeholder="Last Name" aria-describedby="basic-addon1" required>
+            </div>
+            <br>
+            <div class="input-group">
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-envelope user-grey"></span>
+                <label class="registerLabel">Email <span>*</span></label>
+            </span>
+                <input ng-model="user.email" type="email" class="form-control" placeholder="Email Address" aria-describedby="basic-addon1" required>
+            </div>
+            <br>
+            <label>Student/Professor</label>
+            <div class="input-group button-down">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon glyphicon-briefcase user-grey"></span>
+                    <label class="registerLabel">Select <span>*</span></label>
+                </span>
+                <select ng-model="user.role" type="text" class="form-control" placeholder="Student/Professor" aria-describedby="basic-addon1" required>
+                    <option>Student</option>
+                    <option>Professor</option>
+                </select>
+            </div>
+            <button class="btn btn-primary btn-block" 
+					ng-disabled="model.isDisabled">Register</button>
+            <a class="btn btn-danger  btn-block"
+               href="#/login">Cancel</a>
+        </form>
+    </div>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <p class="copyright hidden-xs">© Northeastern CCIS 2018</p>
+        <div class="dropdown navbar-text pull-left" ng-if="model.user.role != 'admin'">
+            <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
+                Need help?
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#/contactAdmin">Contact Admin</a></li>
+            </ul>
+        </div>
+        <div class="dropdown navbar-text pull-right">
+            <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#/login">Login</a></li>
+                <li><a>Register</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

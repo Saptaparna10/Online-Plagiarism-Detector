@@ -1,0 +1,78 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <a>
+            <div ng-show="model.open">
+                <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.openNav()"></span>
+            </div>
+            <div ng-show="!model.open">
+                <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.closeNav()"></span>
+            </div>
+        </a>
+        <div class="navbar-text pull-right" ng-show="model.userId">
+            <a class="name" href="#!/profile">Hi {{model.user.firstName}}</a>
+        </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#!/home">MovieOn</a>
+        </div>
+    </div>
+</nav>
+<div id="mySidenav" class="sidenav">
+    <a href="#/profile">Profile</a>
+    <a href="#/userApprove">Approve users</a>
+    <a href="#/analysis">Analysis</a>
+    <a class="active-page" href="#/userContact">Contact Notes</a>
+    <a ng-click="model.logout()">Logout</a>
+</div>
+<div class="container-fluid panel panel-default" id="main">
+    <div ng-show="model.message" class="alert alert-info" role="alert">
+        {{model.message}}
+    </div>
+    <div ng-show="model.error" class="alert alert-danger" role="alert">
+        {{model.error}}
+    </div>
+    <h4 class="panel panel-default">Users</h4>
+    <table ng-table="model.tableParams" class="table table-condensed table-bordered table-striped" show-filter="true">
+        <tr ng-repeat="row in $data">
+            <td data-title="'First Name'" filter="{ 'firstName': 'text'}" sortable="'firstName'" class="center">
+                {{row.firstName}}
+            </td>
+            <td data-title="'Last Name'" filter="{ 'lastName': 'text'}" sortable="'lastName'" class="center">
+                {{row.lastName}}
+            </td>
+            <td data-title="'Email'" filter="{ 'email': 'text'}" sortable="'email'" class="center">
+                {{row.email}}
+            </td>
+            <td data-title="'Note'" filter="{ 'description': 'text'}" sortable="'description'" class="center">
+                {{row.description}}
+            </td>
+            <td data-title="'Delete Note'" class="center">
+                <button type="button" class="btn btn-primary btn-s shift-up-btn" ng-click="model.deleteNote(row.id)">
+                    <span class="glyphicon glyphicon-user"></span> Delete Note
+                </button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <p class="copyright hidden-xs">© Northeastern CCIS 2018</p>
+        <div class="dropdown navbar-text pull-left" ng-if="model.user.role != 'admin'">
+            <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
+                Need help?
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#!/contactAdmin">Contact Admin</a></li>
+            </ul>
+        </div>
+        <div class="dropdown navbar-text pull-right">
+            <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li ng-show="model.userId"><a href="#/profile">Profile</a></li>
+                <li><a ng-click="model.logout()">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

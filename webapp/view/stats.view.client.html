@@ -1,0 +1,90 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <a>
+            <div ng-show="model.open">
+                <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.openNav()"></span>
+            </div>
+            <div ng-show="!model.open">
+                <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.closeNav()"></span>
+            </div>
+        </a>
+        <div class="navbar-text pull-right" ng-show="model.userId">
+            <a class="name" href="#/profile">Hi {{model.user.firstName}}</a>
+        </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#/profile">Whiteboard</a>
+        </div>
+    </div>
+</nav>
+
+<div id="mySidenav" class="sidenav">
+    <div ng-show="model.userId">
+        <a href="#/profile">Profile</a>
+        <a class="active-page">Statistics</a>
+        <a href="#/course">Courses</a>
+        <a ng-click="model.logout()">Logout</a>
+    </div>
+</div>
+
+<div class="container-fluid panel panel-default" id="main">
+    <div ng-show="model.message" class="alert alert-info" role="alert">
+        {{model.message}}
+    </div>
+    <div class="panel panel-default">
+        <h4>Plagiarism check statistics</h4>
+        <label class="pull-right pull-up">Number of plagiarism checks performed: {{ model.tableParams.total() }}</label>
+    </div>
+    <table ng-table="model.tableParams" class="table table-condensed table-bordered table-striped" show-filter="true">
+        <tr ng-repeat="row in $data">
+            <td data-title="'For homework'" filter="{ 'homework.name': 'text'}" sortable="'homework.name'" class="center">
+                {{row.homework.name}}
+            </td>
+            <td data-title="'For course'" filter="{ 'homework.course.name': 'text'}" sortable="'homework.course.name'" class="center">
+                {{row.homework.course.name}}
+            </td>
+            <td data-title="'For student'" filter="{ 'student.username': 'text'}" sortable="'student.username'" class="center">
+                {{row.student.username}}
+            </td>
+            <td data-title="'For Algo'" filter="{ 'algoId': 'text'}" sortable="'algoId'" class="center">
+                <div ng-if="row.algoId == 0">All</div>
+                <div ng-if="row.algoId == 1">Algo 1</div>
+                <div ng-if="row.algoId == 2">Algo 2</div>
+                <div ng-if="row.algoId == 3">Algo 3</div>
+                <div ng-if="row.algoId == 4">Algo 4</div>
+                <div ng-if="row.algoId == 5">Weighted</div>
+            </td>
+            <td data-title="'Run Date Time'" filter="{ 'runDateTime': 'text'}" sortable="'runDateTime'" class="center" pattern="dd/MM/YYYY">
+                {{row.runDateTime}}
+            </td>
+            <td data-title="'Comparisons to be performed'" filter="{ 'casesToRun': 'text'}" sortable="'casesToRun'" class="center">
+                {{row.casesToRun}}
+            </td>
+            <td data-title="'Comparisons performed'" filter="{ 'casesRan': 'text'}" sortable="'casesRan'" class="center">
+                {{row.casesRan}}
+            </td>
+        </tr>
+    </table>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <p class="copyright hidden-xs">© Northeastern CCIS 2018</p>
+        <div class="dropdown navbar-text pull-left" ng-if="model.user.role != 'admin'">
+            <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
+                Need help?
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#/contactAdmin">Contact Admin</a></li>
+            </ul>
+        </div>
+        <div class="dropdown navbar-text pull-right">
+            <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#/profile">Profile</a></li>
+                <li><a ng-click="model.logout()">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

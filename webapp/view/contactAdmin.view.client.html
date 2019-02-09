@@ -1,0 +1,112 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <a>
+            <div ng-show="model.open">
+                <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.openNav()"></span>
+            </div>
+            <div ng-show="!model.open">
+                <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.closeNav()"></span>
+            </div>
+        </a>
+        <div class="navbar-text pull-right" ng-show="model.userId">
+            <a class="name" href="#/profile">Hi {{model.user.firstName}}</a>
+        </div>
+        <div class="navbar-header" ng-if="!model.userId">
+            <a class="navbar-brand" href="#/login">Whiteboard</a>
+        </div>
+        <div class="navbar-header" ng-if="model.userId">
+            <a class="navbar-brand" href="#/profile">Whiteboard</a>
+        </div>
+    </div>
+</nav>
+
+<div id="mySidenav" class="sidenav">
+    <div ng-show="model.userId">
+        <a href="#/profile">Profile</a>
+    </div>
+    <div ng-show="model.user.role == 'Student'">
+        <a href="#/course">Courses</a>
+    </div>
+    <div ng-show="model.user.role == 'Professor'">
+        <a href="#/stats">Statistics</a>
+        <a href="#/course">Courses</a>
+    </div>
+    <div ng-show="model.userId">
+        <a ng-click="model.logout()">Logout</a>
+    </div>
+    <div ng-show="!model.userId">
+        <a href="#/login">Login</a>
+        <a href="#/register">Register</a>
+    </div>
+</div>
+
+<div class="container-fluid" id="main">
+    <div ng-show="model.error" class="alert alert-danger" role="alert">
+        {{model.error}}
+    </div>
+    <div ng-show="model.message" class="alert alert-success" role="alert">
+        {{model.message}}
+    </div>
+
+    <form ng-submit="model.contactAdmin(model.user)">
+        <label>Form</label>
+        <div class="input-group" ng-if="model.userId">
+                <span class="input-group-addon fixed-width">
+                    <span class="glyphicon glyphicon glyphicon-user user-grey"></span>
+                    <span>Username</span>
+                </span>
+            <input ng-model="model.user.username" type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" readonly>
+        </div>
+        <br>
+        <div class="input-group">
+            <span class="input-group-addon fixed-width">
+                <span class="glyphicon glyphicon glyphicon-pencil user-grey"></span>
+                <span>First Name</span>
+            </span>
+            <input ng-model="model.user.firstName" type="text" class="form-control" placeholder="First Name" aria-describedby="basic-addon1" required>
+        </div>
+        <br>
+        <div class="input-group">
+            <span class="input-group-addon fixed-width">
+                <span class="glyphicon glyphicon glyphicon-pencil user-grey"></span>
+                <span>Last Name</span>
+            </span>
+            <input ng-model="model.user.lastName" type="text" class="form-control" placeholder="Last Name" aria-describedby="basic-addon1" required>
+        </div>
+        <br>
+        <div class="input-group">
+            <span class="input-group-addon fixed-width">
+                <span class="glyphicon glyphicon glyphicon-envelope user-grey"></span>
+                <span>Email</span>
+            </span>
+            <input ng-model="model.user.email" type="email" class="form-control" placeholder="Email Address" aria-describedby="basic-addon1" required>
+        </div>
+        <br>
+        <div class="input-group button-down">
+            <span class="input-group-addon fixed-width">
+                <span class="glyphicon glyphicon glyphicon-pencil user-grey"></span>
+                <span>Description</span>
+            </span>
+            <textarea ng-model="model.user.description" type="text" class="form-control"
+                      rows="4" placeholder="Description" required></textarea>
+        </div>
+        <button class="btn btn-success btn-block">Submit</button>
+    </form>
+
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="dropdown navbar-text pull-right">
+            <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li ng-show="!model.userId"><a href="#/login">Login</a></li>
+                <li ng-show="!model.userId"><a href="#/register">Register</a></li>
+                <li ng-show="!model.userId"><a href="#/profile">Profile</a></li>
+                <li ng-show="model.userId"><a ng-click="model.logout()">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

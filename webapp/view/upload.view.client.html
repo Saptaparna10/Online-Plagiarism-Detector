@@ -1,0 +1,186 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <a>
+            <div ng-show="model.open">
+                <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.openNav()"></span>
+            </div>
+            <div ng-show="!model.open">
+                <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.closeNav()"></span>
+            </div>
+        </a>
+        <div class="navbar-text pull-right" ng-show="model.userId">
+            <a class="name" href="#/profile">Hi {{model.user.firstName}}</a>
+        </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#/profile">Whiteboard</a>
+        </div>
+    </div>
+</nav>
+
+<div id="mySidenav" class="sidenav">
+    <div ng-show="model.userId">
+        <a href="#/profile">Profile</a>
+        <a href="#/course">Courses</a>
+        <ul><a href="#/course/{{model.courseId}}/hw">Homeworks</a></ul>
+        <ul><ul><a class="active-page">Submission</a></ul></ul>
+        <a ng-click="model.logout()">Logout</a>
+    </div>
+</div>
+
+<div class="container-fluid panel panel-default" id="main">
+    <div ng-show="model.error" class="alert alert-danger" role="alert">
+        {{model.error}}
+    </div>
+    <div ng-show="model.message" class="alert alert-success" role="alert">
+        {{model.message}}
+    </div>
+    <div ng-show="model.info" class="alert alert-info" role="alert">
+        {{model.info}}
+    </div>
+    <div class="panel panel-default">
+        <label><h4>Submit for Homework: {{model.hw.name}}</h4></label>
+        <p class="pull-right">
+            *Only python files will be uploaded.<br>
+            *System only works for python3.
+        </p>
+    </div>
+    <br/>
+    <!-- 3. nv-file-over uploader="link" over-class="className" -->
+    <!-- Example: nv-file-drop="" uploader="{Object}" options="{Object}" filters="{String}" -->
+    <div class="well well-lg my-drop-zone text-center" nv-file-drop="" nv-file-over="" uploader="model.uploader">
+        Drop your files here
+    </div>
+
+    <div ng-if="model.uploaded.length > 0">
+        <p>Files already uploaded: {{ model.uploaded.length }}</p>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th width="50%">Name</th>
+                <th>Size</th>
+                <th>Progress</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in model.uploaded">
+                <td><strong>{{ item.fileName }}</strong></td>
+                <td nowrap>{{ item.pyFile.length/1024|number:2 }} KB</td>
+                <td>
+                    <div class="progress" style="margin-bottom: 0;">
+                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': 100 + '%' }"></div>
+                    </div>
+                </td>
+                <td class="text-center">
+                    <span><i class="glyphicon glyphicon-ok"></i></span>
+                </td>
+                <td nowrap>
+                    <button type="button" class="btn btn-success btn-xs" ng-disabled="true">
+                        <span class="glyphicon glyphicon-upload"></span> Upload
+                    </button>
+                    <button type="button" class="btn btn-warning btn-xs" ng-disabled="true">
+                        <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                    </button>
+                    <button type="button" class="btn btn-danger btn-xs" ng-disabled="true">
+                        <span class="glyphicon glyphicon-trash"></span> Remove
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p>Files to upload: {{ model.uploader.queue.length }}</p>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th width="50%">Name</th>
+            <th>Size</th>
+            <th>Progress</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in model.uploader.queue">
+            <td><strong>{{ item.file.name }}</strong></td>
+            <td nowrap>{{ item.file.size/1024|number:2 }} KB</td>
+            <td>
+                <div class="progress" style="margin-bottom: 0;">
+                    <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                </div>
+            </td>
+            <td class="text-center">
+                <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle on-upload"></i></span>
+                <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+            </td>
+            <td nowrap>
+                <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                    <span class="glyphicon glyphicon-upload"></span> Upload
+                </button>
+                <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+                    <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                </button>
+                <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                    <span class="glyphicon glyphicon-trash"></span> Remove
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br/>
+    <div>
+        <div>
+            <p>Upload progress:</p>
+            <div class="progress" style="">
+                <div class="progress-bar" role="progressbar" ng-style="{ 'width': model.uploader.progress + '%' }"></div>
+            </div>
+        </div>
+        <span class="btn btn-primary btn-s fileinput-button" ng-class="">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    <span>Add files</span>
+                    <input type="file" filters="pyFilter" nv-file-select="" uploader="model.uploader" multiple ng-disabled="">
+        </span>
+        <span class="btn btn-primary btn-s fileinput-button" ng-class="">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    <span>Add folder</span>
+                    <input type="file" filters="pyFilter" nv-file-select="" uploader="model.uploader" webkitdirectory directory multiple ng-disabled="">
+        </span>
+        <button type="button" class="btn btn-success btn-s" ng-click="model.uploader.uploadAll()" ng-disabled="!model.uploader.getNotUploadedItems().length">
+            <span class="glyphicon glyphicon-upload"></span> Upload all
+        </button>
+        <button type="button" class="btn btn-warning btn-s" ng-click="model.uploader.cancelAll()" ng-disabled="!model.uploader.isUploading">
+            <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
+        </button>
+        <button type="button" class="btn btn-danger btn-s" ng-click="model.uploader.clearQueue()" ng-disabled="!model.uploader.queue.length">
+            <span class="glyphicon glyphicon-trash"></span> Remove all
+        </button>
+    </div>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <p class="copyright hidden-xs">© Northeastern CCIS 2018</p>
+        <div class="dropdown navbar-text pull-left" ng-if="model.user.role != 'admin'">
+            <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
+                Need help?
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#/contactAdmin">Contact Admin</a></li>
+            </ul>
+        </div>
+        <div class="dropdown navbar-text pull-right">
+            <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#/profile">Profile</a></li>
+                <li><a ng-click="model.logout()">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

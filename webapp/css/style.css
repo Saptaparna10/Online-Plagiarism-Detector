@@ -1,0 +1,305 @@
+.navbar-default {
+    background-color: darkslategrey;
+}
+.add-pad{
+    min-width: 24px;
+}
+.pull-up{
+    margin-top: -30px;
+}
+.fileinput-button {
+    position: relative;
+    overflow: hidden;
+}
+.fileinput-button input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    opacity: 0;
+    -ms-filter: 'alpha(opacity=0)';
+    font-size: 200px;
+    direction: ltr;
+    cursor: pointer;
+}
+.spaceRadio{
+    margin-right: 20px !important;
+}
+body {
+    padding-top: 60px;
+    padding-bottom: 70px;
+}
+.panel-default{
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+}
+.active-page{
+    background-color: dimgrey;
+}
+.name {
+    color: white;
+}
+.name:hover{
+    color: black;
+}
+.glyphicon-option-vertical{
+    margin-top: 16px;
+    margin-right: 25px;
+}
+.btn{
+    margin-top: 10px;
+}
+.pull-down{
+    padding-top: 10px;
+}
+.shift-left2{
+    margin-right: 10px;
+}
+.shift-up-3{
+    margin-top: -3px;
+}
+a, a:hover, a:active, a:visited, a:focus {
+    text-decoration:none;
+    cursor: pointer;
+}
+.center{
+    text-align: center;
+}
+.glyphicon{
+    color: white;
+}
+.glyphicon:hover{
+    color: black;
+}
+.glyphicon-edit{
+    color: dodgerblue;
+}
+.glyphicon-menu-hamburger{
+    color: dodgerblue;
+}
+.navbar-default .navbar-brand{
+    color: white;
+}
+.navbar-default .navbar-brand:hover{
+    color: black;
+}
+.navbar-default .navbar-link{
+    color: white;
+}
+.navbar-default .navbar-link:hover{
+    color: black;
+}
+
+div.collapse .nav-link a{
+    color: white;
+}
+div.collapse .nav-link a:hover{
+    color: black;
+}
+.leftDiv{
+    border-right: 1px solid lightgrey;
+    height: auto;
+}
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    left: 0;
+    background-color: darkslategrey; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    display: block;
+    transition: 0.3s
+}
+
+.sidenav a:hover, .offcanvas a:focus{
+    color: black;
+}
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+#main {
+    transition: margin-left .5s;
+}
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+.user-grey{
+    color: darkslategrey; !important;
+}
+.button-down{
+    padding-bottom: 10px;
+}
+.fixed-width{
+    min-width: 120px;
+}
+p.copyright {
+    position: absolute;
+    width: 100%;
+    color: #fff;
+    line-height: 30px;
+    font-size: 0.8em;
+    text-align: center;
+    bottom:0;
+}
+p.condition{
+    position: absolute;
+    font-size: 0.8em;
+}
+.glyphicon-remove{
+    color: dodgerblue;
+}
+.black{
+    color: darkslategrey;
+}
+.black:hover{
+    color: black
+}
+.my-drop-zone{
+    border: dotted 3px lightgray;
+    height: 120px;
+}
+.nv-file-over{
+    border: dotted 3px dodgerblue;
+}
+.glyphicon-ok{
+    color: green;
+}
+.on-upload{
+    color: blue;
+}
+.glyphicon-remove{
+    color: red;
+}
+.red{
+    background-color: lightpink;
+}
+.yellow{
+    background-color: lightyellow;
+}
+.green{
+    background-color: lightgreen;
+}
+.content{
+    overflow-x: scroll;
+    width: 100%;
+
+}
+mark{
+    background-color: lightpink;
+}
+.form-center{
+    margin: auto;
+    width: 60%;
+    padding: 30px 0;
+}
+.form-center2{
+    margin: auto;
+    width: 70%;
+}
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+.hm-img{
+    width: 100%;
+}
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+.pull-up-3{
+    margin-top: -40px;
+}
+pre {
+    counter-reset: line;
+}
+
+code {
+    counter-increment: line;
+}
+
+code::before {
+    content: counter(line);
+    display: inline-block;
+    width: 3.0em; /* Fixed width */
+    border-right: 1px solid #ddd;
+    padding: 0 .5em;
+    margin-right: .5em;
+    color: #888;
+    -webkit-user-select: none;
+}
+
+.code2 {
+    display: inline-block;
+}
+
+.registerLabel{
+    width: 8em;
+}

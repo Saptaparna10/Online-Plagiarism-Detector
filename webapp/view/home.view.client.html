@@ -1,0 +1,95 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <a>
+            <div ng-show="model.open">
+                <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.openNav()"></span>
+            </div>
+            <div ng-show="!model.open">
+                <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.closeNav()"></span>
+            </div>
+        </a>
+        <div class="navbar-header">
+            <a class="navbar-brand">Team-113</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-left">
+                <li><a>Manuj</a></li>
+                <li><a>Saptaparna</a></li>
+                <li><a>Zikun</a></li>
+                <li><a>Javesh</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id="mySidenav" class="sidenav">
+    <a href="#/login" target="_blank">
+        <i class="fa fa-graduation-cap" aria-hidden="true"></i> Project (Whiteboard)
+    </a>
+    <a href="http://ec2-52-15-102-224.us-east-2.compute.amazonaws.com:8081/#/" target="_blank">
+        <i class="fa fa-server" aria-hidden="true"></i> Operations Server
+    </a>
+    <a href="https://youtu.be/oFMP1tvbLdo" target="_blank">
+        <i class="fa fa-video-camera" aria-hidden="true"></i> System Demo Video
+    </a>
+    <a href="https://youtu.be/C5XYFE7YOh8" target="_blank">
+        <i class="fa fa-video-camera" aria-hidden="true"></i> System Setup Video
+    </a>
+    <a href="https://youtu.be/wOz0RkEY4UQ" target="_blank">
+        <i class="fa fa-video-camera" aria-hidden="true"></i> Final Presentation Video
+    </a>
+    <a href="https://github.ccs.neu.edu/cs5500/team-113" target="_blank">
+        <span><i class="fa fa-github" aria-hidden="true"></i></span> Team-113 Github
+    </a>
+</div>
+
+<div class="container-fluid panel panel-default" id="main">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-wrap=true>
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to={{$index}} ng-class="{active:!$index}" ng-repeat="image in model.images"></li>
+        </ol>
+
+        <div class="carousel-inner">
+            <div class="item" ng-class="{active:!$index}" ng-repeat="image in model.images">
+                <img class="img-responsive hm-img" ng-src={{image}}>
+            </div>
+        </div>
+
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div>
+    <br>
+    <div class="panel panel-default">
+        <a style="margin-left: 10%;" href="#/login" target="_blank">
+            Project (Whiteboard)
+        </a>
+        <a style="margin-left: 25%;" href="http://ec2-52-15-102-224.us-east-2.compute.amazonaws.com:8081/#/" target="_blank">
+            Operations Server
+        </a>
+        <a class="pull-right" style="margin-right: 10%;" href="https://youtu.be/oFMP1tvbLdo" target="_blank">
+            System Demo Video
+        </a>
+    </div>
+    <div class="panel panel-default">
+        <a style="margin-left: 10%;" href="https://youtu.be/C5XYFE7YOh8" target="_blank">
+            System Setup Video
+        </a>
+        <a style="margin-left: 24%;" href="https://youtu.be/wOz0RkEY4UQ" target="_blank">
+            Final Presentation Video
+        </a>
+        <a class="pull-right" style="margin-right: 11%;"  href="https://github.ccs.neu.edu/cs5500/team-113" target="_blank">
+            Team-113 Github
+        </a>
+    </div>
+</div>
+
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <p class="copyright hidden-xs">© Northeastern CCIS 2018</p>
+    </div>
+</nav>

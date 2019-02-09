@@ -1,0 +1,116 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <a>
+            <div ng-show="model.open">
+                <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.openNav()"></span>
+            </div>
+            <div ng-show="!model.open">
+                <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.closeNav()"></span>
+            </div>
+        </a>
+        <div class="navbar-text pull-right" ng-show="model.userId">
+            <a class="name" href="#/profile">Hi {{model.user.firstName}}</a>
+        </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#/profile">Whiteboard</a>
+        </div>
+    </div>
+</nav>
+
+<div id="mySidenav" class="sidenav">
+    <div ng-show="model.userId">
+        <a href="#/profile">Profile</a>
+        <a href="#/stats">Statistics</a>
+        <a href="#/course">Courses</a>
+        <ul><a href="#/course/{{model.courseId}}/hw">Homeworks</a></ul>
+        <ul><ul><a href="#/course/{{model.courseId}}/hw/{{model.hwId}}/submissions">Submissions</a></ul></ul>
+        <ul><ul><a class="active-page">Plagiarism</a></ul></ul>
+        <a ng-click="model.logout()">Logout</a>
+    </div>
+</div>
+
+<div class="container-fluid panel panel-default" id="main">
+    <div ng-show="model.error" class="alert alert-danger" role="alert">
+        {{model.error}}
+    </div>
+    <h4 class="panel panel-default">Plagiarism percent for {{model.hw.name}} for {{model.student.firstName}} {{model.student.lastName}}</h4>
+    <table ng-table="model.tableParams" class="table table-condensed table-bordered table-striped" show-filter="true">
+        <tr ng-repeat="row in $data">
+            <td data-title="'Selected student file'" filter="{ 'studentUpload.fileName': 'text'}" sortable="'studentUpload.fileName'" class="center">
+                {{row.studentUpload.fileName}}
+            </td>
+            <td data-title="'Other student name'" filter="{ 'otherUpload.student.firstName': 'text'}" sortable="'otherUpload.student.firstName'" class="center">
+                {{row.otherUpload.student.firstName}} {{row.otherUpload.student.lastName}}
+            </td>
+            <td data-title="'Other student file'" filter="{ 'otherUpload.fileName': 'text'}" sortable="'otherUpload.fileName'" class="center">
+                {{row.otherUpload.fileName}}
+            </td>
+
+            <td ng-class='{red : row.percent > 80, yellow: row.percent > 40 && row.percent <= 80, green: row.percent <= 40}' data-title="'Percent'" filter="{ 'percent': 'text'}" sortable="'percent'" class="center" ng-if="model.algoId != 0">
+                <div ng-if="row.percent > -1">
+                    <strong>{{ row.percent }}</strong>
+                </div>
+                <div ng-if="row.percent < 0">
+                    <strong>Error in parsing</strong>
+                </div>
+            </td>
+
+            <td ng-class='{red : row.percent1 > 80, yellow: row.percent1 > 40 && row.percent1 <= 80, green: row.percent1 <= 40}' data-title="'Percent (Algo1)'" filter="{ 'percent1': 'text'}" sortable="'percent1'" class="center" ng-if="model.algoId == 0">
+                <strong>{{ row.percent1 }}</strong>
+            </td>
+            <td ng-class='{red : row.percent2 > 80, yellow: row.percent2 > 40 && row.percent2 <= 80, green: row.percent2 <= 40}' data-title="'Percent (Algo2)'" filter="{ 'percent2': 'text'}" sortable="'percent2'" class="center" ng-if="model.algoId == 0">
+                <strong>{{ row.percent2 }}</strong>
+            </td>
+
+            <td ng-class='{red : row.percent3 > 80, yellow: row.percent3 > 40 && row.percent3 <= 80, green: row.percent3 <= 40}' data-title="'Percent (LCS)'" filter="{ 'percent3': 'text'}" sortable="'percent3'" class="center" ng-if="model.algoId == 0">
+                <div ng-if="row.percent3 > -1">
+                    <strong>{{ row.percent3 }}</strong>
+                </div>
+                <div ng-if="row.percent3 < 0">
+                    <strong>Error in parsing</strong>
+                </div>
+            </td>
+
+            <td ng-class='{red : row.percent4 > 80, yellow: row.percent4 > 40 && row.percent4 <= 80, green: row.percent4 <= 40}' data-title="'Percent (EditDistance)'" filter="{ 'percent4': 'text'}" sortable="'percent4'" class="center" ng-if="model.algoId == 0">
+                <div ng-if="row.percent4 > -1">
+                    <strong>{{ row.percent4 }}</strong>
+                </div>
+                <div ng-if="row.percent4 < 0">
+                    <strong>Error in parsing</strong>
+                </div>
+            </td>
+
+            <td ng-class='{red : row.percent5 > 80, yellow: row.percent5 > 40 && row.percent5 <= 80, green: row.percent5 <= 40}' data-title="'Percent (Weighted)'" filter="{ 'percent5': 'text'}" sortable="'percent5'" class="center" ng-if="model.algoId == 0">
+                <strong>{{ row.percent5 }}</strong>
+            </td>
+            <td data-title="'Report'" class="center">
+                <a type="button" class="btn btn-primary btn-s shift-up-3" href="#/course/{{model.courseId}}/hw/{{model.hwId}}/student/{{model.studentId}}/algo/{{model.algoId}}/file1/{{row.studentUpload.id}}/file2/{{row.otherUpload.id}}/report">
+                    <span class="glyphicon glyphicon-alert"></span> Get Report
+                </a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <p class="copyright hidden-xs">© Northeastern CCIS 2018</p>
+        <div class="dropdown navbar-text pull-left" ng-if="model.user.role != 'admin'">
+            <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
+                Need help?
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#/contactAdmin">Contact Admin</a></li>
+            </ul>
+        </div>
+        <div class="dropdown navbar-text pull-right">
+            <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#/profile">Profile</a></li>
+                <li><a ng-click="model.logout()">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

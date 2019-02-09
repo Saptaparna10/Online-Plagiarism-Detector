@@ -1,0 +1,77 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <a>
+            <div ng-show="model.open">
+                <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.openNav()"></span>
+            </div>
+            <div ng-show="!model.open">
+                <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.closeNav()"></span>
+            </div>
+        </a>
+        <div class="navbar-text pull-right" ng-show="model.userId">
+            <a class="name" href="#/profile">Hi {{model.user.firstName}}</a>
+        </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#/profile">Whiteboard</a>
+        </div>
+    </div>
+</nav>
+
+<div id="mySidenav" class="sidenav">
+    <div ng-show="model.userId">
+        <a href="#/profile">Profile</a>
+        <a href="#/stats">Statistics</a>
+        <a href="#/course">Courses</a>
+        <ul><a href="#/course/{{model.courseId}}/hw">Homeworks</a></ul>
+        <ul><ul><a href="#/course/{{model.courseId}}/hw/{{model.hwId}}/submissions">Submissions</a></ul></ul>
+        <ul><ul><a href="#/course/{{model.courseId}}/hw/{{model.hwId}}/student/{{model.studentId}}/percent/{{model.algoId}}">Plagiarism</a></ul></ul>
+        <ul><ul><a class="active-page">Report</a></ul></ul>
+        <a ng-click="model.logout()">Logout</a>
+    </div>
+</div>
+
+<div class="container-fluid panel panel-default" id="main">
+    <div ng-show="model.message" class="alert alert-info" role="alert">
+        {{model.message}}
+    </div>
+
+    <div class="panel panel-default">
+        <h4 >Plagiarism report</h4>
+        <button class="btn btn-primary pull-right pull-up-3" ng-click="model.getReport()">Download Report</button>
+    </div>
+
+    <div class="container-fluid panel panel-default" id="report">
+        <div class="col-xs-6">
+            <h4 class="panel panel-default">File {{model.report.uploadSuspected.fileName}} of student: {{model.report.uploadSuspected.student.firstName}} {{model.report.uploadSuspected.student.lastName}}</h4>
+            <pre><div class="content" ng-bind-html="model.report.htmlSuspected"></div></pre>
+        </div>
+        <div class="col-xs-6">
+            <h4 class="panel panel-default">File {{model.report.uploadOriginal.fileName}} of {{model.report.uploadOriginal.student.firstName}} {{model.report.uploadOriginal.student.lastName}}</h4>
+            <pre><div class="content" ng-bind-html="model.report.htmlOriginal"></div></pre>
+        </div>
+    </div>
+
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <p class="copyright hidden-xs">© Northeastern CCIS 2018</p>
+        <div class="dropdown navbar-text pull-left" ng-if="model.user.role != 'admin'">
+            <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
+                Need help?
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#/contactAdmin">Contact Admin</a></li>
+            </ul>
+        </div>
+        <div class="dropdown navbar-text pull-right">
+            <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#/profile">Profile</a></li>
+                <li><a ng-click="model.logout()">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

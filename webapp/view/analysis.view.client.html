@@ -1,0 +1,57 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <a>
+            <div ng-show="model.open">
+                <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.openNav()"></span>
+            </div>
+            <div ng-show="!model.open">
+                <span class="glyphicon glyphicon-option-vertical pull-left" ng-click="model.closeNav()"></span>
+            </div>
+        </a>
+        <div class="navbar-text pull-right" ng-show="model.userId">
+            <a class="name" href="#/profile">Hi {{model.user.firstName}}</a>
+        </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#/profile">Whiteboard</a>
+        </div>
+    </div>
+</nav>
+
+<div id="mySidenav" class="sidenav">
+    <a href="#/profile">Profile</a>
+    <a href="#/userApprove">Approve users</a>
+    <a class="active-page">Analysis</a>
+    <a href="#/userContact">Contact Notes</a>
+    <a ng-click="model.logout()">Logout</a>
+</div>
+
+<div class="container panel panel-default" id="main">
+    <iframe width="600" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRKccsxmDgv98Npe1zT5DgN45vqygpon5zxkyXE95SCB8CoO-RHpDmeuCHNLqAr9grFc_NIluTNtZk6/pubchart?oid=630019256&amp;format=interactive"></iframe>
+    <iframe width="600" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRmAZqyD4siwmo27b6Ky0tPt93_BM2aVOwQ8OpcZ31cGNTARL69XjlXBX5Uh3AB4MZ9yTGTS5tEtClT/pubchart?oid=406019927&amp;format=interactive"></iframe>
+    <iframe width="600" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRDC841m9ZIGOugLLtgB280D9ZeyR44Z4Shh2zFxWcE9kDo5klkBmo-Fuvbw9kkn0f5mpFTSN9Y0NU3/pubchart?oid=800971511&amp;format=interactive"></iframe>
+    <iframe width="600" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTlKDW8-m5159kLpl-yPKw1lY75qdqugml7N7q7ICyflOvKCKbwnKJYQlSoydh6f5Y7d_TfGLcIv-_l/pubchart?oid=255737536&amp;format=interactive"></iframe>
+</div>
+
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <p class="copyright hidden-xs">© Northeastern CCIS 2018</p>
+        <div class="dropdown navbar-text pull-left" ng-if="model.user.role != 'admin'">
+            <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
+                Need help?
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#/contactAdmin">Contact Admin</a></li>
+            </ul>
+        </div>
+        <div class="dropdown navbar-text pull-right">
+            <a href="" class="navbar-link dropdown-toggle" type="button" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a>Profile</a></li>
+                <li><a ng-click="model.logout()">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
